@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+</head>
+<body>
+    <style>
+        .ok{
+            font-size: 24px;
+            color: blue;
+            padding: 5px 10px;
+            border: 2px solid red;
+        }
+        .ng{
+            font-size: 20px;
+            color: gray;
+        }
+
+        .box{
+            margin: 1em;
+        }
+        .dot-none{
+            list-style-type: none;
+        }
+    </style>
+    <h1 class="bg-secondary text-white display-4 pl-3">Vue3</h1>
+    <div id="app" class="container">
+        <p class="bg-info text-white display-6" style="padding: 1.2rem; width: 12rem;">{{ message }}</p>
+        <div>
+            <hello v-for="item in items" v-bind:name="item.name"  v-bind:price="item.price" />
+        </div>
+
+    </div>
+    <script>
+        const appdata = {
+            data(){
+                return{
+                    message:"商品リスト",
+                    items:[
+                        {name:"おにぎり",price:"100円"},
+                        {name:"サンドイッチ",price:"200円"},
+                        {name:"コーヒー",price:"150円"},
+                        {name:"弁当",price:"500円"},
+                        {name:"パン",price:"150円"}
+                    ]
+                }
+            }
+        }
+        let app = Vue.createApp(appdata);
+
+        app.component('hello',{
+            props:["name","price"],
+            data(){
+                return{
+                    message: "これは新しいメッセージです。"
+                }
+            },
+            // template: '<p class="alert alert-primary">{{name}} {{price}}</p>'
+            template: '<div class="card box" style="width: 10rem;"><ul class="list-group list-group-flush"><li class="card-header dot-none">{{name}}</li><li class="list-group-item">{{price}}</li></ul></div>'
+        })
+
+        app.mount("#app");
+    </script>
+</body>
+</html>
